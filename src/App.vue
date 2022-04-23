@@ -1,4 +1,3 @@
-
 <template>
 <div id="nav">
   <ul>
@@ -6,13 +5,24 @@
   </ul>
   </div>
   <input class="input-box" type="text" v-model="search" placeholder="User">
+  <button onClick="fetchData()" id="queryBtn" class="btn">Go</button>
+  <p class="status" type="text">{{status}}</p>
 </template>
 
 <script>
+/* eslint-disable */
 export default {
   name: 'App',
   components: {
   }
+}
+
+function fetchData() {
+  return fetch('https://my-ocular.jeffalo.net/api/user/' + this.search)
+    .then(response => response.json())
+    .then(json => {
+      this.status = json;
+    });
 }
 </script>
 
@@ -43,9 +53,17 @@ ul {
   display: flex;
 }
 .input-box {
-  width: 100%;
+  width: 90%;
   padding: 6pt;
   border: none;
   outline: none;
+}
+.btn {
+  width: 10%;
+  padding: 6pt;
+  border: none;
+  outline: none;
+  background-color: #222;
+  color: white;
 }
 </style>
